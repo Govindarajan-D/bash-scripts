@@ -1,0 +1,23 @@
+#!/bin/bash
+
+message=
+git_push_all(){
+  git add -A
+  git status
+  git commit -m $1
+  git push origin master
+}
+
+if [ $# -gt 0 ]; then
+    case $1 in
+        -m | --message ) shift
+                         message=$1
+                         git_push_all
+                         ;;
+        *)               
+                        echo "Wrong option. Please use -m for commit message"
+                        ;;
+    esac
+else
+    echo "Error: Did not specify the commit message"
+fi
